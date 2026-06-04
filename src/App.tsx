@@ -322,7 +322,7 @@ export default function App() {
         </div>
 
         {/* BLOCK 5.5: Countdown */}
-        <div className="w-full bg-[#FFFFFF] px-8 py-16 flex flex-col items-center text-center font-sans">
+        <div className="w-full bg-[#FFFFFF] px-8 pt-2 pb-16 flex flex-col items-center text-center font-sans">
           <FadeUp>
             <h2 className="font-cursive text-[44px] sm:text-[50px] leading-none text-[#B69B7A] mb-10 opacity-90">
               До нашего дня осталось
@@ -355,14 +355,14 @@ export default function App() {
           </FadeUp>
 
           <FadeUp delay={0.25}>
-            <p className="text-[#8F8F8F] text-[14px] sm:text-[15px] leading-[1.6] max-w-[320px] mx-auto font-light">
+            <p className="text-[#8F8F8F] text-[14px] sm:text-[15px] leading-[1.6] font-light whitespace-nowrap">
               С нетерпением ждем этот день вместе с вами
             </p>
           </FadeUp>
         </div>
 
         {/* BLOCK 6: Telegram */}
-        <div className="w-full bg-[#FFFFFF] px-8 py-16 flex flex-col items-center text-center font-sans">
+        <div className="w-full bg-[#FFFFFF] px-8 pt-8 pb-16 flex flex-col items-center text-center font-sans">
           <FadeUp>
             <h2 className="font-cursive text-[44px] sm:text-[50px] leading-none text-[#B69B7A] mb-12 opacity-90">
               Свадебный чат
