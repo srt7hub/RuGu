@@ -1,7 +1,6 @@
 import { Infinity } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import dressCodeImg from './assets/images/dress_code.webp';
 
 // Fade-up при скролле — переиспользуем для каждого блока
 function FadeUp({
@@ -28,7 +27,6 @@ function FadeUp({
 
 export default function App() {
   const daysOfWeek = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
-  const emptyDays: null[] = [];
   const daysInMonth = Array.from({ length: 12 }, (_, i) => i + 20);
 
   const targetDate = new Date('2026-07-31T14:30:00+05:00').getTime();
@@ -77,7 +75,7 @@ export default function App() {
           <motion.div
             className="absolute inset-0 bg-cover bg-center scale-110"
             style={{
-              backgroundImage: `url('/osn1.webp'), url('/osn1.jpg')`,
+              backgroundImage: `url('/fon1.jpg')`,
               y: heroParallax,
             }}
           />
@@ -86,41 +84,37 @@ export default function App() {
           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/50 via-black/10 to-transparent pointer-events-none" />
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/20 blur-[80px] rounded-full pointer-events-none" />
 
-          <div className="relative h-full flex flex-col justify-between p-8 sm:p-12 z-10 w-full">
+          <div className="relative h-full z-10 w-full">
 
-            {/* Date Block — появляется сверху */}
+            {/* Date — правый верхний угол, крупные цифры */}
             <motion.div
-              className="relative z-10 self-start"
+              className="absolute top-8 right-8 sm:top-12 sm:right-12 text-right"
               initial={{ opacity: 0, y: -24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             >
-              <div className="flex flex-col text-white text-[72px] sm:text-[84px] font-light leading-[0.85] tracking-tighter opacity-95">
+              <div className="flex flex-col items-end text-white text-[72px] sm:text-[84px] font-light leading-[0.85] tracking-tighter opacity-95">
                 <span>31</span>
-                <span className="h-[2px] w-12 bg-white/40 my-4 ml-1"></span>
+                <span className="h-[2px] w-12 bg-white/40 my-4 mr-1"></span>
                 <span>07</span>
-                <span className="h-[2px] w-12 bg-white/40 my-4 ml-1"></span>
+                <span className="h-[2px] w-12 bg-white/40 my-4 mr-1"></span>
                 <span>26</span>
               </div>
             </motion.div>
 
-            {/* Names — появляется снизу */}
+            {/* Names — левый нижний угол */}
             <motion.div
-              className="relative z-10 self-end text-right"
+              className="absolute bottom-8 left-8 sm:bottom-12 sm:left-12"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.45 }}
             >
-              <div className="mb-2">
-                <h1 className="font-serif italic font-normal text-white text-[40px] sm:text-[48px] leading-tight drop-shadow-md">
-                  Руслан <br />
-                  <span className="text-3xl opacity-80 font-light drop-shadow-sm">&</span> <br />
-                  Гульзифа
-                </h1>
-              </div>
-              <div className="flex justify-end">
-                <Infinity className="text-white opacity-80 w-10 h-10 stroke-[1]" aria-hidden="true" />
-              </div>
+              <h1 className="font-serif italic font-normal text-white text-[40px] sm:text-[48px] leading-tight drop-shadow-md mb-3">
+                Руслан<br />
+                <span className="text-3xl opacity-80 font-light not-italic">&amp;</span><br />
+                Гульзифа
+              </h1>
+              <Infinity className="text-white/80 w-10 h-10 stroke-[1]" aria-hidden="true" />
             </motion.div>
 
           </div>
@@ -149,15 +143,12 @@ export default function App() {
           {/* Calendar */}
           <FadeUp delay={0.3} className="w-full">
             <div className="w-full max-w-[380px] mx-auto flex flex-col">
-              <h3 className="text-[#8F8F8F] text-[13px] uppercase tracking-[0.2em] mb-6 font-medium">Июль</h3>
-              <div className="grid grid-cols-7 gap-y-5 gap-x-0 w-full text-center">
+              <h3 className="text-[#8F8F8F] text-[13px] uppercase tracking-[0.2em] mb-4 font-medium">Июль</h3>
+              <div className="grid grid-cols-7 gap-y-4 gap-x-0 w-full text-center">
                 {daysOfWeek.map((day, idx) => (
-                  <div key={`header-${idx}`} className="text-[11px] uppercase text-[#8F8F8F] font-medium tracking-wider mb-2">
+                  <div key={`header-${idx}`} className="text-[11px] uppercase text-[#B69B7A] font-semibold tracking-wider pb-3 border-b border-[#E8E0D5]">
                     {day}
                   </div>
-                ))}
-                {emptyDays.map((_, idx) => (
-                  <div key={`empty-${idx}`} />
                 ))}
                 {daysInMonth.map((day) => {
                   const isWeddingDay = day === 31;
@@ -171,7 +162,7 @@ export default function App() {
                           <span className="relative z-10 text-white font-semibold text-[15px]">{day}</span>
                         </>
                       ) : (
-                        <span className="text-[#8F8F8F] font-light text-[15px]">{day}</span>
+                        <span className="text-[#5E5E5E] font-light text-[15px]">{day}</span>
                       )}
                     </div>
                   );
@@ -233,34 +224,61 @@ export default function App() {
         </div>
 
         {/* BLOCK 4: Program */}
-        <div className="w-full bg-[#FFFFFF] px-8 pb-16 flex flex-col items-center font-sans">
+        <div className="w-full bg-[#FAF9F6] px-8 py-16 flex flex-col items-center font-sans">
           <FadeUp>
-            <h2 className="font-cursive text-[44px] sm:text-[50px] leading-none text-[#B69B7A] mb-10 opacity-90">
+            <h2 className="font-cursive text-[44px] sm:text-[50px] leading-none text-[#B69B7A] mb-14 opacity-90 text-center">
               Программа
             </h2>
           </FadeUp>
 
-          <div className="w-full max-w-[340px] flex flex-col gap-10">
+          <div className="w-full max-w-[320px] relative">
+            {/* Вертикальная золотая линия */}
+            <motion.div
+              className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[#C9B89A] to-transparent"
+              initial={{ scaleY: 0, originY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            />
+
             {[
-              { time: '14:30', title: 'Сбор гостей' },
-              { time: '15:00', title: 'Церемония бракосочетания' },
-              { time: '16:00', title: 'Банкет' },
-              { time: '23:00', title: 'Завершение' },
+              { time: '14:30', title: 'Сбор\nгостей', icon: '✦', side: 'left' },
+              { time: '15:00', title: 'Церемония\nбракосочетания', icon: '♡', side: 'right' },
+              { time: '16:00', title: 'Банкет', icon: '✦', side: 'left' },
+              { time: '23:00', title: 'Завершение', icon: '✦', side: 'right' },
             ].map((item, idx) => (
-              <FadeUp key={idx} delay={idx * 0.1}>
-                <div className="flex items-center w-full">
-                  <span className="font-serif italic text-[24px] text-[#9B9B9B] w-[65px] text-left shrink-0">
-                    {item.time}
-                  </span>
-                  <div className="flex-1 flex items-center justify-center px-4 relative">
-                    <div className="h-[1px] w-full bg-[#D8D8D8]"></div>
-                    <div className="w-1 h-1 rounded-full bg-[#D8D8D8] absolute"></div>
-                  </div>
-                  <span className="font-sans font-medium text-[14px] sm:text-[15px] text-[#5E5E5E] w-[130px] sm:w-[140px] text-left shrink-0 leading-tight">
-                    {item.title}
-                  </span>
-                </div>
-              </FadeUp>
+              <motion.div
+                key={idx}
+                className="relative flex items-center mb-9 last:mb-0"
+                initial={{ opacity: 0, x: item.side === 'left' ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: idx * 0.15 }}
+              >
+                {item.side === 'left' ? (
+                  <>
+                    <div className="flex-1 text-right pr-4">
+                      <p className="font-serif italic text-[28px] text-[#B69B7A] leading-none mb-0.5">{item.time}</p>
+                      <p className="font-sans text-[15px] text-[#5E5E5E] font-light leading-snug whitespace-pre-line">{item.title}</p>
+                    </div>
+                    <div className="w-7 h-7 rounded-full bg-white border border-[#C9B89A] flex items-center justify-center shrink-0 z-10 shadow-sm">
+                      <span className="text-[#B69B7A] text-[9px]">{item.icon}</span>
+                    </div>
+                    <div className="flex-1 pl-4" />
+                  </>
+                ) : (
+                  <>
+                    <div className="flex-1 pr-4" />
+                    <div className="w-7 h-7 rounded-full bg-white border border-[#C9B89A] flex items-center justify-center shrink-0 z-10 shadow-sm">
+                      <span className="text-[#B69B7A] text-[9px]">{item.icon}</span>
+                    </div>
+                    <div className="flex-1 text-left pl-4">
+                      <p className="font-serif italic text-[28px] text-[#B69B7A] leading-none mb-0.5">{item.time}</p>
+                      <p className="font-sans text-[15px] text-[#5E5E5E] font-light leading-snug whitespace-pre-line">{item.title}</p>
+                    </div>
+                  </>
+                )}
+              </motion.div>
             ))}
           </div>
         </div>
@@ -294,7 +312,7 @@ export default function App() {
           <FadeUp delay={0.2}>
             <div className="w-full max-w-[380px] mx-auto mb-10">
               <img
-                src={dressCodeImg}
+                src="/q1.png"
                 alt="Примеры нарядов в цветах дресс-кода"
                 className="w-full h-auto object-contain mix-blend-multiply"
                 loading="lazy"
@@ -371,34 +389,31 @@ export default function App() {
         </div>
 
         {/* BLOCK 7: Final message */}
-        <div className="w-full bg-[#FFFFFF] pt-16 flex flex-col items-center text-center font-sans">
+        <div className="w-full bg-[#F5EFE6] py-20 px-8 flex flex-col items-center text-center font-sans">
           <FadeUp>
-            <div className="mb-14 px-8">
-              <h2 className="font-cursive text-[40px] sm:text-[46px] leading-tight text-[#B69B7A] opacity-90">
-                Будем вас ждать!<br />
-                С любовью,<br />
-                Руслан и Гульзифа.
-              </h2>
+            <h2 className="font-cursive text-[40px] sm:text-[46px] leading-tight text-[#B69B7A] mb-10">
+              Будем вас ждать!<br />
+              С любовью,<br />
+              Руслан и Гульзифа.
+            </h2>
+          </FadeUp>
+
+          {/* Decorative divider */}
+          <FadeUp delay={0.15}>
+            <div className="flex items-center gap-4 mb-10">
+              <div className="w-16 h-[1px] bg-[#C9B89A]" />
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-[#B69B7A]">
+                <rect x="6" y="0" width="8.485" height="8.485" rx="0.5" transform="rotate(45 6 0)" fill="currentColor" />
+              </svg>
+              <div className="w-16 h-[1px] bg-[#C9B89A]" />
             </div>
           </FadeUp>
 
-          <motion.div
-            className="w-full"
-            initial={{ opacity: 0, scale: 1.04 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <picture>
-              <source srcSet="/osn2.webp" type="image/webp" />
-              <img
-                src="/osn2.png"
-                alt="Свадебные цветы"
-                className="w-full h-auto aspect-[3/4] object-cover"
-                loading="lazy"
-              />
-            </picture>
-          </motion.div>
+          <FadeUp delay={0.25}>
+            <p className="text-[#B69B7A] text-[52px] sm:text-[64px] font-light tracking-[0.1em] font-serif leading-none">
+              31 · 07 · 2026
+            </p>
+          </FadeUp>
         </div>
 
       </div>
